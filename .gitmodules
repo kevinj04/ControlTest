@@ -1,0 +1,3 @@
+[submodule "submodules/ui"]
+	path = submodules/ui
+	url = git@github.com:kevinj04/UI-Modules.git
