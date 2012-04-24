@@ -125,6 +125,7 @@
 		0AC54E211547463B00AD41D6 /* HelloWorldLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC54E201547463B00AD41D6 /* HelloWorldLayer.m */; };
 		0AC54E3C1547485D00AD41D6 /* libUserInput.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC54E35154747DA00AD41D6 /* libUserInput.a */; };
 		0AC54E56154748C300AD41D6 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0AC54E55154748C300AD41D6 /* Config.xcconfig */; };
+		0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC54E5815474C6000AD41D6 /* TestScene.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -391,6 +392,8 @@
 		0AC54E221547463B00AD41D6 /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		0AC54E29154747DA00AD41D6 /* UIModule.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UIModule.xcodeproj; path = submodules/ui/UIModule.xcodeproj; sourceTree = SOURCE_ROOT; };
 		0AC54E55154748C300AD41D6 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0AC54E5715474C6000AD41D6 /* TestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
+		0AC54E5815474C6000AD41D6 /* TestScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScene.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -798,6 +801,8 @@
 			isa = PBXGroup;
 			children = (
 				0AC54E29154747DA00AD41D6 /* UIModule.xcodeproj */,
+				0AC54E5715474C6000AD41D6 /* TestScene.h */,
+				0AC54E5815474C6000AD41D6 /* TestScene.m */,
 			);
 			name = submodules;
 			sourceTree = "<group>";
@@ -1012,6 +1017,7 @@
 				0AC54E1B1547463B00AD41D6 /* AppDelegate.m in Sources */,
 				0AC54E1E1547463B00AD41D6 /* RootViewController.m in Sources */,
 				0AC54E211547463B00AD41D6 /* HelloWorldLayer.m in Sources */,
+				0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
