@@ -460,6 +460,8 @@
 				0AC54E1F1547463B00AD41D6 /* HelloWorldLayer.h */,
 				0AC54E201547463B00AD41D6 /* HelloWorldLayer.m */,
 				0AC54E221547463B00AD41D6 /* GameConfig.h */,
+				0AC54E5715474C6000AD41D6 /* TestScene.h */,
+				0AC54E5815474C6000AD41D6 /* TestScene.m */,
 				0AC54CC51547463800AD41D6 /* Resources */,
 				0AC54CD91547463800AD41D6 /* libs */,
 				0AC54E151547463B00AD41D6 /* Supporting Files */,
@@ -801,8 +803,6 @@
 			isa = PBXGroup;
 			children = (
 				0AC54E29154747DA00AD41D6 /* UIModule.xcodeproj */,
-				0AC54E5715474C6000AD41D6 /* TestScene.h */,
-				0AC54E5815474C6000AD41D6 /* TestScene.m */,
 			);
 			name = submodules;
 			sourceTree = "<group>";
@@ -1129,6 +1129,7 @@
 				0AC54E271547463B00AD41D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

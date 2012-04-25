@@ -50,13 +50,32 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 }
 - (void) setup {
     
-    targetLayer = [[SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)] retain];
-    [self addChild:targetLayer];
+    SetTargetLayer *test = [SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)];
+    targetLayer = [test retain];
+    //targetLayer = [[SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)] retain];
+    [self addChild:targetLayer z:10];
     
 }
 - (void) dealloc {
     if (targetLayer != nil) { [targetLayer release]; targetLayer = nil; }
     [super dealloc];
+}
+
+- (void) onEnterTransitionDidFinish {
+    [self schedule:@selector(update:) interval:0.005];
+    [super onEnterTransitionDidFinish];
+}
+
+
+- (void) update:(double) dt {
+    
+    if ([self.children objectAtIndex:0] != nil) {
+        CCNode *child = [self.children objectAtIndex:0];
+        NSLog(@"Child: %@", child);
+    }
+    
+    [targetLayer update:dt];
+    
 }
 
 - (void) draw {
