@@ -21,14 +21,17 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 }
 - (void) handleSetTarget:(NSNotification *) notification {
     CGPoint forced = CGPointFromString([[notification userInfo] objectForKey:forceApplied]);
-    NSLog(@"Applying force: %@", NSStringFromCGPoint(forced));
+    
+    [self turnWithForce:forced]; 
+    
+    //NSLog(@"Applying force: %@", NSStringFromCGPoint(forced));
     // add code here
 }
 @end
 
 @implementation TestScene
 
-@synthesize targetLayer;
+@synthesize targetLayer, hero;
 
 - (id) init {
     
@@ -52,12 +55,18 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     
     SetTargetLayer *test = [SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)];
     targetLayer = [test retain];
+    
     //targetLayer = [[SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)] retain];
     [self addChild:targetLayer z:10];
+    
+    hero = [[PlayerObject alloc] init];
+    [self addChild:hero z:1];
     
 }
 - (void) dealloc {
     if (targetLayer != nil) { [targetLayer release]; targetLayer = nil; }
+    [hero release];
+    
     [super dealloc];
 }
 
@@ -69,18 +78,26 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) update:(double) dt {
     
+    /*
     if ([self.children objectAtIndex:0] != nil) {
         CCNode *child = [self.children objectAtIndex:0];
         NSLog(@"Child: %@", child);
     }
-    
+     */
+    [hero update:dt];
     [targetLayer update:dt];
     
 }
 
 - (void) draw {
+
     
-    ccDrawPoint(ccp(200,200));
+}
+
+
+- (void) turnWithForce:(CGPoint) force{
+    
+    [hero steerToPoint:force];
     
 }
 

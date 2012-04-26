@@ -126,6 +126,8 @@
 		0AC54E3C1547485D00AD41D6 /* libUserInput.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC54E35154747DA00AD41D6 /* libUserInput.a */; };
 		0AC54E56154748C300AD41D6 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0AC54E55154748C300AD41D6 /* Config.xcconfig */; };
 		0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC54E5815474C6000AD41D6 /* TestScene.m */; };
+		2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2082A9B41549BD6A0011BB68 /* PlayerObject.m */; };
+		20F969901549AA2A00B03C46 /* MovableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F9698F1549AA2A00B03C46 /* MovableObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -394,6 +396,10 @@
 		0AC54E55154748C300AD41D6 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0AC54E5715474C6000AD41D6 /* TestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
 		0AC54E5815474C6000AD41D6 /* TestScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScene.m; sourceTree = "<group>"; };
+		2082A9B31549BD6A0011BB68 /* PlayerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerObject.h; sourceTree = "<group>"; };
+		2082A9B41549BD6A0011BB68 /* PlayerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerObject.m; sourceTree = "<group>"; };
+		20F9698E1549AA2A00B03C46 /* MovableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovableObject.h; sourceTree = "<group>"; };
+		20F9698F1549AA2A00B03C46 /* MovableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovableObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -460,6 +466,10 @@
 				0AC54E1F1547463B00AD41D6 /* HelloWorldLayer.h */,
 				0AC54E201547463B00AD41D6 /* HelloWorldLayer.m */,
 				0AC54E221547463B00AD41D6 /* GameConfig.h */,
+				20F9698E1549AA2A00B03C46 /* MovableObject.h */,
+				20F9698F1549AA2A00B03C46 /* MovableObject.m */,
+				2082A9B31549BD6A0011BB68 /* PlayerObject.h */,
+				2082A9B41549BD6A0011BB68 /* PlayerObject.m */,
 				0AC54E5715474C6000AD41D6 /* TestScene.h */,
 				0AC54E5815474C6000AD41D6 /* TestScene.m */,
 				0AC54CC51547463800AD41D6 /* Resources */,
@@ -1018,6 +1028,8 @@
 				0AC54E1E1547463B00AD41D6 /* RootViewController.m in Sources */,
 				0AC54E211547463B00AD41D6 /* HelloWorldLayer.m in Sources */,
 				0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */,
+				20F969901549AA2A00B03C46 /* MovableObject.m in Sources */,
+				2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
