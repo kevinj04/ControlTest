@@ -127,6 +127,11 @@
 		0AC54E56154748C300AD41D6 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0AC54E55154748C300AD41D6 /* Config.xcconfig */; };
 		0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC54E5815474C6000AD41D6 /* TestScene.m */; };
 		2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2082A9B41549BD6A0011BB68 /* PlayerObject.m */; };
+		2082A9C31549CE980011BB68 /* debugFont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9BF1549CE980011BB68 /* debugFont-hd.fnt */; };
+		2082A9C41549CE980011BB68 /* debugFont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C01549CE980011BB68 /* debugFont-hd.png */; };
+		2082A9C51549CE980011BB68 /* debugFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C11549CE980011BB68 /* debugFont.fnt */; };
+		2082A9C61549CE980011BB68 /* debugFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C21549CE980011BB68 /* debugFont.png */; };
+		2082A9C91549D3020011BB68 /* ObstacleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2082A9C81549D3020011BB68 /* ObstacleObject.m */; };
 		20F969901549AA2A00B03C46 /* MovableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F9698F1549AA2A00B03C46 /* MovableObject.m */; };
 /* End PBXBuildFile section */
 
@@ -398,6 +403,12 @@
 		0AC54E5815474C6000AD41D6 /* TestScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScene.m; sourceTree = "<group>"; };
 		2082A9B31549BD6A0011BB68 /* PlayerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerObject.h; sourceTree = "<group>"; };
 		2082A9B41549BD6A0011BB68 /* PlayerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerObject.m; sourceTree = "<group>"; };
+		2082A9BF1549CE980011BB68 /* debugFont-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "debugFont-hd.fnt"; sourceTree = "<group>"; };
+		2082A9C01549CE980011BB68 /* debugFont-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "debugFont-hd.png"; sourceTree = "<group>"; };
+		2082A9C11549CE980011BB68 /* debugFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = debugFont.fnt; sourceTree = "<group>"; };
+		2082A9C21549CE980011BB68 /* debugFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugFont.png; sourceTree = "<group>"; };
+		2082A9C71549D3020011BB68 /* ObstacleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleObject.h; sourceTree = "<group>"; };
+		2082A9C81549D3020011BB68 /* ObstacleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObstacleObject.m; sourceTree = "<group>"; };
 		20F9698E1549AA2A00B03C46 /* MovableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovableObject.h; sourceTree = "<group>"; };
 		20F9698F1549AA2A00B03C46 /* MovableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovableObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -468,6 +479,8 @@
 				0AC54E221547463B00AD41D6 /* GameConfig.h */,
 				20F9698E1549AA2A00B03C46 /* MovableObject.h */,
 				20F9698F1549AA2A00B03C46 /* MovableObject.m */,
+				2082A9C71549D3020011BB68 /* ObstacleObject.h */,
+				2082A9C81549D3020011BB68 /* ObstacleObject.m */,
 				2082A9B31549BD6A0011BB68 /* PlayerObject.h */,
 				2082A9B41549BD6A0011BB68 /* PlayerObject.m */,
 				0AC54E5715474C6000AD41D6 /* TestScene.h */,
@@ -482,6 +495,10 @@
 		0AC54CC51547463800AD41D6 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2082A9BF1549CE980011BB68 /* debugFont-hd.fnt */,
+				2082A9C01549CE980011BB68 /* debugFont-hd.png */,
+				2082A9C11549CE980011BB68 /* debugFont.fnt */,
+				2082A9C21549CE980011BB68 /* debugFont.png */,
 				0AC54CC61547463800AD41D6 /* Default.png */,
 				0AC54CC81547463800AD41D6 /* fps_images.png */,
 				0AC54CCA1547463800AD41D6 /* Icon-72.png */,
@@ -918,6 +935,10 @@
 				0AC54CD51547463800AD41D6 /* Icon@2x.png in Resources */,
 				0AC54CD81547463800AD41D6 /* iTunesArtwork in Resources */,
 				0AC54E56154748C300AD41D6 /* Config.xcconfig in Resources */,
+				2082A9C31549CE980011BB68 /* debugFont-hd.fnt in Resources */,
+				2082A9C41549CE980011BB68 /* debugFont-hd.png in Resources */,
+				2082A9C51549CE980011BB68 /* debugFont.fnt in Resources */,
+				2082A9C61549CE980011BB68 /* debugFont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1030,6 +1051,7 @@
 				0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */,
 				20F969901549AA2A00B03C46 /* MovableObject.m in Sources */,
 				2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */,
+				2082A9C91549D3020011BB68 /* ObstacleObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

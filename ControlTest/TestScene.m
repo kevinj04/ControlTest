@@ -7,6 +7,7 @@
 //
 
 #import "TestScene.h"
+#define NUM_OBSTACLES 10
 
 NSString *const nSetTarget = @"targetLayerUpdate";
 
@@ -22,7 +23,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 - (void) handleSetTarget:(NSNotification *) notification {
     CGPoint forced = CGPointFromString([[notification userInfo] objectForKey:forceApplied]);
     
-    [self turnWithForce:forced]; 
+    [hero steerToPoint:forced];
     
     //NSLog(@"Applying force: %@", NSStringFromCGPoint(forced));
     // add code here
@@ -31,7 +32,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 @implementation TestScene
 
-@synthesize targetLayer, hero;
+@synthesize targetLayer, hero, speedLabel, obstacles;
 
 - (id) init {
     
@@ -62,10 +63,28 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     hero = [[PlayerObject alloc] init];
     [self addChild:hero z:1];
     
+    speedLabel = [CCLabelBMFont labelWithString:@"a" fntFile:@"debugFont.fnt"];
+    [speedLabel setPosition:CGPointMake(100.0, 300.0)];
+    [speedLabel setString:@"Works"];
+    [self addChild:speedLabel z:1];
+    
+    NSMutableArray *tmpObstacles = [[NSMutableArray alloc] init];
+    for (int i = 0; i < NUM_OBSTACLES; i++) {
+        ObstacleObject *anObstacle = [[ObstacleObject alloc] init];
+        [tmpObstacles addObject:anObstacle];
+        [self addChild:anObstacle z:1];
+    }
+    
+    obstacles = [[NSArray alloc] initWithArray:tmpObstacles];
+    [tmpObstacles release];
+   
+    
 }
 - (void) dealloc {
     if (targetLayer != nil) { [targetLayer release]; targetLayer = nil; }
     [hero release];
+    [speedLabel release];
+    [obstacles release];
     
     [super dealloc];
 }
@@ -78,27 +97,24 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) update:(double) dt {
     
-    /*
-    if ([self.children objectAtIndex:0] != nil) {
-        CCNode *child = [self.children objectAtIndex:0];
-        NSLog(@"Child: %@", child);
+    for (ObstacleObject *o in obstacles) {
+        [o setSpeed:[hero xSpeed]];
+        [o update:dt];
     }
-     */
+    
     [hero update:dt];
     [targetLayer update:dt];
+    //NSLog(@"DT: %2.2f",dt);
     
 }
 
 - (void) draw {
 
+    [speedLabel setString:[NSString stringWithFormat:@"Speed %3.0f", [hero xSpeed]]];
     
 }
 
 
-- (void) turnWithForce:(CGPoint) force{
-    
-    [hero steerToPoint:force];
-    
-}
+
 
 @end

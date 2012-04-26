@@ -8,16 +8,19 @@
 
 #import "PlayerObject.h"
 
-#define MAX_TURN_SPEED 3.0
+#define MAX_TURN_SPEED 5.0
+#define MAX_SPEED 100.0
 
 @implementation PlayerObject
+
+@synthesize xSpeed;
 
 - (id) init{
     
     // always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
     
-	if( (self=[super initWithRect:CGRectMake(240.0, 160.0, 50.0, 15.0)])) {
+	if( (self=[super initWithRect:CGRectMake(140.0, 160.0, 50.0, 15.0)])) {
         
     }
 	return self;
@@ -34,19 +37,29 @@
 
 - (void) steerToPoint:(CGPoint) point{
     
+    // apply steering force
+    
     float dy = (point.y - model.origin.y)/20; 
     if(dy>0)
         dy = fmin(dy, MAX_TURN_SPEED);
     else
         dy = fmax(dy, MAX_TURN_SPEED * -1.0);
     
-    model.origin.y += dy;
+    if(xSpeed > 1.0)
+        model.origin.y += dy * (0.5 + xSpeed/100.0*0.5);
+    
+    // decrement speed
+    if(xSpeed>0)
+        xSpeed -= fabsf(dy/MAX_TURN_SPEED) * xSpeed/MAX_SPEED * 1.0;
 }
 
 
 - (void) update:(ccTime) dt{
     
     [super update:dt];
+    
+    if(xSpeed <= MAX_SPEED)
+        xSpeed += 0.15;
     
 }
 - (void) draw{

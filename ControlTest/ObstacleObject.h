@@ -1,5 +1,5 @@
 //
-//  PlayerObject.h
+//  ObstacleObject.h
 //  ControlTest
 //
 //  Created by Michael Highland on 4/26/12.
@@ -9,8 +9,8 @@
 #import "MovableObject.h"
 #import "cocos2d.h"
 
-@interface PlayerObject : MovableObject {
-
+@interface ObstacleObject : MovableObject {
+    
     float xSpeed;
     
 }
@@ -21,9 +21,8 @@
 - (void) update:(ccTime) dt;
 - (void) draw;
 - (void) dealloc;
-- (void) setX:(float) newX;
-- (void) setY:(float) newY;
-- (void) steerToPoint:(CGPoint) point;
+- (void) setSpeed:(float) speed;
+- (void) randomReset;
 
 
 @end
