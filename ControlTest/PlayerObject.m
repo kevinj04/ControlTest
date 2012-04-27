@@ -46,7 +46,7 @@
         dy = fmax(dy, MAX_TURN_SPEED * -1.0);
     
     if(xSpeed > 1.0)
-        model.origin.y += dy * (0.5 + xSpeed/100.0*0.5);
+        model.origin.y += dy * (0.10 + xSpeed/100.0*0.9);
     
     // decrement speed
     if(xSpeed>0)
