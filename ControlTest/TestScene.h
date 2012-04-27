@@ -12,6 +12,8 @@
 #import "MovableObject.h"
 #import "PlayerObject.h"
 #import "ObstacleObject.h"
+#import "SneakyButton.h"
+#import "DoubleTapButton.h"
 
 @interface TestScene : CCScene {
 
@@ -19,12 +21,18 @@
     PlayerObject *hero;
     CCLabelBMFont *speedLabel;
     NSArray *obstacles;
+    
+    SneakyButton *brake;
+    DoubleTapButton *powerUpButton;
 }
 
 @property (nonatomic, retain) SetTargetLayer *targetLayer;
 @property (nonatomic, retain) MovableObject *hero;
 @property (nonatomic, retain) CCLabelBMFont *speedLabel;
 @property (nonatomic, retain) NSArray *obstacles;
+
+@property (nonatomic, retain) SneakyButton *brake;
+@property (nonatomic, retain) DoubleTapButton *powerUpButton;
 
 - (id) init;
 + (id) scene;

@@ -14,11 +14,23 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 @interface TestScene (hidden)
 - (void) registerNotifications;
 - (void) handleSetTarget:(NSNotification *) notification;
+- (void) handleBrakeButtonDown:(NSNotification *) notification;
+- (void) handleBrakeButtonUp:(NSNotification *) notification;
+- (void) handlePowerUpButtonDown:(NSNotification *) notification;
+- (void) handlePowerUpButtonUp:(NSNotification *) notification;
 @end
 
 @implementation TestScene (hidden)
 - (void) registerNotifications {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleSetTarget:) name:nSetTarget object:nil];
+    
+    // button code
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBrakeButtonDown:) name:@"brakeButtonDown" object:brake];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleBrakeButtonUp:) name:@"brakeButtonUp" object:brake];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePowerUpButtonDown:) name:@"brakeButtonDown" object:powerUpButton];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePowerUpButtonUp:) name:@"brakeButtonUp" object:powerUpButton];
+    
 }
 - (void) handleSetTarget:(NSNotification *) notification {
     CGPoint forced = CGPointFromString([[notification userInfo] objectForKey:forceApplied]);
@@ -28,11 +40,24 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     //NSLog(@"Applying force: %@", NSStringFromCGPoint(forced));
     // add code here
 }
+
+- (void) handleBrakeButtonDown:(NSNotification *) notification {
+    NSLog(@"Brake Down");
+}
+- (void) handleBrakeButtonUp:(NSNotification *) notification {
+    NSLog(@"Brake Up");
+}
+- (void) handlePowerUpButtonDown:(NSNotification *) notification {
+    NSLog(@"Power Up Down");
+}
+- (void) handlePowerUpButtonUp:(NSNotification *) notification {
+    NSLog(@"Power Up Up");
+}
 @end
 
 @implementation TestScene
 
-@synthesize targetLayer, hero, speedLabel, obstacles;
+@synthesize targetLayer, hero, speedLabel, obstacles, brake, powerUpButton;
 
 - (id) init {
     
@@ -78,7 +103,18 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     obstacles = [[NSArray alloc] initWithArray:tmpObstacles];
     [tmpObstacles release];
    
+    // Button code
     
+    brake = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, 30, 320)];
+    brake.boundingBox = CGRectMake(0, 0, 30, 320);
+    [brake setButtonName:@"brakeButton"];
+    [self addChild:brake z:11];
+    
+    powerUpButton = [[DoubleTapButton alloc] initWithRect:CGRectMake(450, 0, 30, 320)];
+    powerUpButton.boundingBox = CGRectMake(450, 0, 30, 320);
+    [powerUpButton setButtonName:@"powerUpButton"];
+    [self addChild:powerUpButton z:11];
+    //
 }
 - (void) dealloc {
     if (targetLayer != nil) { [targetLayer release]; targetLayer = nil; }
