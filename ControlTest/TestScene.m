@@ -18,6 +18,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 - (void) handleBrakeButtonUp:(NSNotification *) notification;
 - (void) handlePowerUpButtonDown:(NSNotification *) notification;
 - (void) handlePowerUpButtonUp:(NSNotification *) notification;
+- (void) handlerPowerButtonDoubleTap:(NSNotification *)notification;
 @end
 
 @implementation TestScene (hidden)
@@ -30,6 +31,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePowerUpButtonDown:) name:@"brakeButtonDown" object:powerUpButton];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlePowerUpButtonUp:) name:@"brakeButtonUp" object:powerUpButton];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handlerPowerButtonDoubleTap:) name:doubleTap object:powerUpButton];
     
 }
 - (void) handleSetTarget:(NSNotification *) notification {
@@ -52,6 +54,9 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 }
 - (void) handlePowerUpButtonUp:(NSNotification *) notification {
     NSLog(@"Power Up Up");
+}
+- (void) handlerPowerButtonDoubleTap:(NSNotification *)notification {
+    NSLog(@"Power Up Double Tap");
 }
 @end
 

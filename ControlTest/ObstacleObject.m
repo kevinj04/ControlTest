@@ -38,7 +38,7 @@
                                     10 + arc4random() % 140, 
                                     10 +arc4random() % 90)];
     xSpeed = 0.0;
-    NSLog(@"Obstacle Reset");
+    //NSLog(@"Obstacle Reset");
     
 }
 
