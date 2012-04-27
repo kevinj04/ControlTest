@@ -45,7 +45,7 @@
 
 - (void) update:(ccTime) dt{
     
-    model.origin.x -= xSpeed * dt * 3.0;
+    model.origin.x -= xSpeed * dt * 4.0;
     
     if(model.origin.x < -200.0)
         [self randomReset];

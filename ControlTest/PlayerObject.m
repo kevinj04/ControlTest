@@ -58,8 +58,7 @@
     
     [super update:dt];
     
-    if(xSpeed <= MAX_SPEED)
-        xSpeed += 0.15;
+    xSpeed += (MAX_SPEED - xSpeed)*(1.0/300.0);
     
 }
 - (void) draw{
