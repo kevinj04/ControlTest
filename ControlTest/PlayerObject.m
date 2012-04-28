@@ -9,21 +9,30 @@
 #import "PlayerObject.h"
 
 #define MAX_TURN_SPEED 5.0
-#define MAX_SPEED 100.0
+#define MAX_SPEED 200.0
 
 @implementation PlayerObject
 
-@synthesize xSpeed;
+@synthesize xSpeed, width, height, isBraking, speedLimit;
 
 - (id) init{
     
     // always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
     
-	if( (self=[super initWithRect:CGRectMake(140.0, 160.0, 50.0, 15.0)])) {
-        
+	if( (self=[super initWithRect:CGRectMake(140.0, 160.0, 1, 1)])) {
+        [self setup];
     }
 	return self;
+    
+}
+
+- (void) setup
+{
+    height = 33;
+    width = 33;
+    isBraking = NO;
+    speedLimit = MAX_SPEED;
     
 }
 
@@ -38,13 +47,30 @@
 - (void) speedBoost
 {
     
-    xSpeed += 100.0;
+    speedLimit = 5000.0;
+    [self performSelector:@selector(killBoost) withObject:nil afterDelay:2.0];
     
 }
+
+- (void) killBoost
+{
+    speedLimit = MAX_SPEED;
+}
+
+
+- (void) drag
+{
+ 
+    xSpeed *= 0.95;
+    
+}
+
 
 - (void) steerToPoint:(CGPoint) point{
     
     // apply steering force
+    
+    point.y -= model.size.height/2;
     
     float dy = (point.y - model.origin.y)/20; 
     if(dy>0)
@@ -57,15 +83,22 @@
     
     // decrement speed
     if(xSpeed>0)
-        xSpeed -= fabsf(dy/MAX_TURN_SPEED) * xSpeed/MAX_SPEED * 1.0;
+        xSpeed -= fabsf(dy/MAX_TURN_SPEED) * xSpeed/MAX_SPEED * 2.0;
 }
 
 
 - (void) update:(ccTime) dt{
     
     [super update:dt];
+    model.size.width = fmin(100.0, width * (1.0 + xSpeed/100.0));
+    model.size.height = fmax(1.0, height / (1.0 + xSpeed/100.0));
     
-    xSpeed += (MAX_SPEED - xSpeed)*(1.0/300.0);
+    if(isBraking){
+        xSpeed += (0.0 - xSpeed)*(1.0/500.0);
+        xSpeed = fmax(0.0, xSpeed - 1.0);
+    }
+    else
+        xSpeed += (speedLimit - xSpeed)*(1.0/500.0) + (1/10.0);
     
 }
 - (void) draw{

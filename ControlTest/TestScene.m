@@ -45,8 +45,11 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) handleBrakeButtonDown:(NSNotification *) notification {
     NSLog(@"Brake Down");
+    //[hero setIsBraking:YES];
+    [hero speedBoost];
 }
 - (void) handleBrakeButtonUp:(NSNotification *) notification {
+    //[hero setIsBraking:NO];
     NSLog(@"Brake Up");
 }
 - (void) handlePowerUpButtonDown:(NSNotification *) notification {
@@ -57,7 +60,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 }
 - (void) handlerPowerButtonDoubleTap:(NSNotification *)notification {
     //NSLog(@"Power Up Double Tap");
-    [hero speedBoost];
+    //[hero speedBoost];
     
     switch (orientation) {
         case top:
@@ -81,7 +84,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 @implementation TestScene
 
-@synthesize targetLayer, hero, speedLabel, obstacles, brake, powerUpButton, orientation;
+@synthesize targetLayer, hero, speedLabel, obstacles, stars, brake, powerUpButton, orientation;
 
 - (id) init {
     
@@ -118,12 +121,23 @@ NSString *const nSetTarget = @"targetLayerUpdate";
         GrandObstacleObject *anObstacle = [[GrandObstacleObject alloc] init];
         [anObstacle setOrientation:orientation];
         [tmpObstacles addObject:anObstacle];
-        [self addChild:anObstacle z:1];
+        [self addChild:anObstacle z:2];
+    }
+  
+    NSMutableArray *tmpStars = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 50; i++) {
+        LineObject *aStar = [[LineObject alloc] init];
+        [tmpStars addObject:aStar];
+        [self addChild:aStar z:1];
     }
     
     obstacles = [[NSArray alloc] initWithArray:tmpObstacles];
     [tmpObstacles release];
-   
+  
+    stars = [[NSArray alloc] initWithArray:tmpStars];
+    [tmpStars release];
+    
+    
     targetLayer = [SetTargetLayer layerWithRect:CGRectMake(240, 0, 240, 320)];
     [self addChild:targetLayer z:12];
     
@@ -160,9 +174,20 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) update:(double) dt {
     
+    
+    for (LineObject *o in stars) {
+        [o setSpeed:[hero xSpeed]];
+        [o update:dt];
+    }
+    
     for (ObstacleObject *o in obstacles) {
         [o setSpeed:[hero xSpeed]];
         [o update:dt];
+        
+        if(CGRectIntersectsRect([o model],[hero model])){
+            [hero drag];
+        }
+        
     }
     
     [hero update:dt];

@@ -22,6 +22,7 @@
 - (id) init;
 - (void) update:(ccTime) dt;
 - (void) draw;
+- (void) earlyWarning;
 - (void) dealloc;
 - (void) setSpeed:(float) speed;
 - (void) randomReset;

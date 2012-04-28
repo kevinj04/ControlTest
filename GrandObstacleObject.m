@@ -12,6 +12,7 @@
 @implementation GrandObstacleObject
 
 @synthesize x, y, z, height, width, depth;
+@synthesize warpFactor, heightWarp, widthWarp, depthWarp;
 
 -(id) init
 {
@@ -28,6 +29,7 @@
 
 -(void) setup{
     orientation = side;
+    warpFactor = 1.0;
     [self viewSide];
 }
 
@@ -41,7 +43,7 @@
 
 -(void) viewTop{
     //switch model    
-    CGRect newRect = CGRectMake(x, z, width, depth);
+    CGRect newRect = CGRectMake(x, z, widthWarp, depthWarp);
     [self setupWithRect:newRect];
     red = 1.0;
     green = 1.0;
@@ -51,7 +53,7 @@
 
 -(void) viewSide{
     //switch model    
-    CGRect newRect = CGRectMake(x, y, width, height);
+    CGRect newRect = CGRectMake(x, y, widthWarp, heightWarp);
     [self setupWithRect:newRect];
     red = 0.0;
     green = 1.0;
@@ -60,17 +62,17 @@
 
 - (void) randomReset {
     
-    x = 580.0 + arc4random() % 1000;
+    x = 580.0 + arc4random() % 2000;
     y = -100 + arc4random() % 420;
     z = -100 + arc4random() % 420;
     
     height = 10 +arc4random() % 90;
-    width = 10 + arc4random() % 140;
+    width = 10 + arc4random() % 90;
     depth = 10 +arc4random() % 90;
     
     //reset the position and size
   
-    speedFactor = 0.5 + 2.0 * CCRANDOM_0_1();
+    speedFactor = 0.8 + 0.4 * CCRANDOM_0_1();
     xSpeed = 0.0;
     //NSLog(@"Obstacle Reset");
  
@@ -97,11 +99,21 @@
             break;
     }
     
+
 }
 
 - (void) update:(ccTime)dt {
     
     x = [self model].origin.x;
+    
+    warpFactor = 1.0 + xSpeed/200.0; 
+    
+    widthWarp = fmin(300.0, width * warpFactor);
+    heightWarp = fmax(1.0, height / warpFactor);
+    depthWarp = fmax(1.0, depth / warpFactor);
+    
+    [self setOrientation:orientation];
+    
     [super update:dt];
 }
 
@@ -129,33 +141,23 @@
     
     switch (orientation) {
         case top:
-            //top
-            ccDrawLine(ccp(x - width/2, y + height/2), 
-                       ccp(x + width/2, y + height/2));	
-            //right
-            ccDrawLine(ccp(x + width/2, y + height/2),
-                       ccp(x + width/2, y - height/2));	
-            //bottom
-            ccDrawLine(ccp(x + width/2, y - height/2),
-                       ccp(x - width/2, y - height/2));		
-            //left
-            ccDrawLine(ccp(x - width/2, y - height/2),
-                       ccp(x - width/2, y + height/2));
+            1+1;
+            CGPoint vertices1[] = { ccp(x,y),
+                                    ccp(x, y + heightWarp), 
+                                    ccp(x + widthWarp, y + heightWarp), 
+                                    ccp(x + widthWarp, y) 
+            };
+            ccDrawPoly(vertices1, 4, YES);
             break;
         
         case side:
-            //top
-            ccDrawLine(ccp(x - width/2, z + depth/2), 
-                       ccp(x + width/2, z + depth/2));	
-            //right
-            ccDrawLine(ccp(x + width/2, z + depth/2),
-                       ccp(x + width/2, z - depth/2));	
-            //bottom
-            ccDrawLine(ccp(x + width/2, z - depth/2),
-                       ccp(x - width/2, z - depth/2));		
-            //left
-            ccDrawLine(ccp(x - width/2, z - depth/2),
-                       ccp(x - width/2, z + depth/2));
+            1+1; // weird bug without this?
+            CGPoint vertices2[] = {  ccp(x,z),
+                                    ccp(x, z + depthWarp), 
+                                    ccp(x + widthWarp, z + depthWarp), 
+                                    ccp(x + widthWarp, z) 
+            };
+            ccDrawPoly(vertices2, 4, YES);
             break;
             
         default:

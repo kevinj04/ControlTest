@@ -14,6 +14,7 @@
 #import "GrandObstacleObject.h"
 #import "SneakyButton.h"
 #import "CTDoubleTap.h"
+#import "LineObject.h"
 
 
 @interface TestScene : CCScene {
@@ -22,6 +23,7 @@
     PlayerObject *hero;
     CCLabelBMFont *speedLabel;
     NSArray *obstacles;
+    NSArray *stars;
     obstacleOrientation orientation; 
     
     SneakyButton *brake;
@@ -32,6 +34,7 @@
 @property (nonatomic, retain) MovableObject *hero;
 @property (nonatomic, retain) CCLabelBMFont *speedLabel;
 @property (nonatomic, retain) NSArray *obstacles;
+@property (nonatomic, retain) NSArray *stars;
 
 @property (nonatomic, retain) SneakyButton *brake;
 @property (nonatomic, retain) CTDoubleTap *powerUpButton;

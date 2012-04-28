@@ -22,6 +22,12 @@ typedef enum obstacleOrientation {
     float height;
     float depth;
     
+    float widthWarp;
+    float heightWarp;
+    float depthWarp;
+    
+    float warpFactor;
+    
     obstacleOrientation orientation;
     
 }
@@ -32,6 +38,12 @@ typedef enum obstacleOrientation {
 @property float width;
 @property float height;
 @property float depth;
+
+@property float widthWarp;
+@property float heightWarp;
+@property float depthWarp;
+
+@property float warpFactor;
 
 
 -(id) init;

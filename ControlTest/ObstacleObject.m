@@ -7,6 +7,7 @@
 //
 
 #import "ObstacleObject.h"
+#define PROXIMITY_ALERT 480.0
 
 @implementation ObstacleObject
 
@@ -48,7 +49,7 @@
     
     model.origin.x -= xSpeed * speedFactor * dt * 2.0;
     
-    if(model.origin.x < -200.0)
+    if(model.origin.x < -500.0)
         [self randomReset];
     
     //NSLog(@"Position: %f and Speed: %f",model.origin.x, xSpeed);
@@ -57,9 +58,28 @@
 }
 - (void) draw{
     
+    [self earlyWarning];
     [super draw];
     
 }
+
+- (void) earlyWarning{
+    
+    float proximity = model.origin.x - model.size.width/2.0 - PROXIMITY_ALERT;
+
+    
+    if(proximity > 0 && proximity < PROXIMITY_ALERT){
+        // approches 1.0 as proximity goes to 0
+        float proxFactor = (PROXIMITY_ALERT - proximity)/PROXIMITY_ALERT;
+        
+        glColor4f(proxFactor, 0.0, 0.0, 1.0);
+        glLineWidth(2.0f);
+        ccDrawLine(ccp(380.0 + proxFactor * 100.0, model.origin.y),
+                   ccp(380.0 + proxFactor * 100.0, model.origin.y + model.size.height));	
+    }
+    
+}
+
 - (void) dealloc{
     
     [super dealloc];

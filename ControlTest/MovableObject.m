@@ -63,18 +63,16 @@
 {
     glColor4f(red, green, blue, alpha);
     glLineWidth(2.0f);
-    //top
-    ccDrawLine(ccp(model.origin.x - model.size.width/2, model.origin.y + model.size.height/2), 
-               ccp(model.origin.x + model.size.width/2, model.origin.y + model.size.height/2));	
-    //right
-    ccDrawLine(ccp(model.origin.x + model.size.width/2, model.origin.y + model.size.height/2),
-               ccp(model.origin.x + model.size.width/2, model.origin.y - model.size.height/2));	
-    //bottom
-    ccDrawLine(ccp(model.origin.x + model.size.width/2, model.origin.y - model.size.height/2),
-               ccp(model.origin.x - model.size.width/2, model.origin.y - model.size.height/2));		
-    //left
-    ccDrawLine(ccp(model.origin.x - model.size.width/2, model.origin.y - model.size.height/2),
-                ccp(model.origin.x - model.size.width/2, model.origin.y + model.size.height/2));	
+   
+    
+    CGPoint vertices[] = {  ccp(model.origin.x, model.origin.y),
+                            ccp(model.origin.x, model.origin.y + model.size.height), 
+                            ccp(model.origin.x + model.size.width, model.origin.y + model.size.height), 
+                            ccp(model.origin.x + model.size.width, model.origin.y) 
+    };
+    
+    ccDrawPoly(vertices, 4, YES);
+    
 }
 
 

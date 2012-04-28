@@ -12,18 +12,28 @@
 @interface PlayerObject : MovableObject {
 
     float xSpeed;
-    
+    float width;
+    float height;
+    bool isBraking;
+    float speedLimit;
 }
 
 @property float xSpeed;
+@property float speedLimit;
+@property float width;
+@property float height;
+@property bool isBraking;
 
 - (id) init;
+- (void) setup;
 - (void) update:(ccTime) dt;
 - (void) draw;
+- (void) drag;
 - (void) dealloc;
 - (void) setX:(float) newX;
 - (void) setY:(float) newY;
 - (void) steerToPoint:(CGPoint) point;
 - (void) speedBoost;
+- (void) killBoost;
 
 @end
