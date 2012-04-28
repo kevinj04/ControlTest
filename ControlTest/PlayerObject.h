@@ -24,6 +24,6 @@
 - (void) setX:(float) newX;
 - (void) setY:(float) newY;
 - (void) steerToPoint:(CGPoint) point;
-
+- (void) speedBoost;
 
 @end

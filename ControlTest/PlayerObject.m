@@ -35,6 +35,13 @@
     model.origin.y = newY;
 }
 
+- (void) speedBoost
+{
+    
+    xSpeed += 100.0;
+    
+}
+
 - (void) steerToPoint:(CGPoint) point{
     
     // apply steering force

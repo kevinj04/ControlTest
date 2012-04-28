@@ -56,13 +56,32 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     NSLog(@"Power Up Up");
 }
 - (void) handlerPowerButtonDoubleTap:(NSNotification *)notification {
-    NSLog(@"Power Up Double Tap");
+    //NSLog(@"Power Up Double Tap");
+    [hero speedBoost];
+    
+    switch (orientation) {
+        case top:
+            orientation = side;
+            break;
+        case side:
+            orientation = top;
+            break;    
+        default:
+            orientation = side;
+            break;
+    }
+    
+    for (GrandObstacleObject *o in obstacles) {
+        [o setOrientation: orientation];
+    }
+    
+    
 }
 @end
 
 @implementation TestScene
 
-@synthesize targetLayer, hero, speedLabel, obstacles, brake, powerUpButton;
+@synthesize targetLayer, hero, speedLabel, obstacles, brake, powerUpButton, orientation;
 
 - (id) init {
     
@@ -84,12 +103,6 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 }
 - (void) setup {
     
-    SetTargetLayer *test = [SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)];
-    targetLayer = [test retain];
-    
-    //targetLayer = [[SetTargetLayer layerWithRect:CGRectMake(0, 0, 480, 320)] retain];
-    [self addChild:targetLayer z:10];
-    
     hero = [[PlayerObject alloc] init];
     [self addChild:hero z:1];
     
@@ -98,9 +111,12 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     [speedLabel setString:@"Works"];
     [self addChild:speedLabel z:1];
     
+    orientation = side;
+    
     NSMutableArray *tmpObstacles = [[NSMutableArray alloc] init];
     for (int i = 0; i < NUM_OBSTACLES; i++) {
-        ObstacleObject *anObstacle = [[ObstacleObject alloc] init];
+        GrandObstacleObject *anObstacle = [[GrandObstacleObject alloc] init];
+        [anObstacle setOrientation:orientation];
         [tmpObstacles addObject:anObstacle];
         [self addChild:anObstacle z:1];
     }
@@ -108,17 +124,23 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     obstacles = [[NSArray alloc] initWithArray:tmpObstacles];
     [tmpObstacles release];
    
+    targetLayer = [SetTargetLayer layerWithRect:CGRectMake(240, 0, 240, 320)];
+    [self addChild:targetLayer z:12];
+    
     // Button code
     
-    brake = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, 30, 320)];
-    brake.boundingBox = CGRectMake(0, 0, 30, 320);
+    brake = [[SneakyButton alloc] initWithRect:CGRectMake(0, 0, 240, 320)];
+    brake.boundingBox = CGRectMake(0, 0, 240, 320);
     [brake setButtonName:@"brakeButton"];
+    [brake setIsHoldable:YES];
     [self addChild:brake z:11];
+    [brake release];
     
-    powerUpButton = [[DoubleTapButton alloc] initWithRect:CGRectMake(450, 0, 30, 320)];
-    powerUpButton.boundingBox = CGRectMake(450, 0, 30, 320);
+    powerUpButton = [[CTDoubleTap alloc] initWithRect:CGRectMake(240, 0, 240, 320)];
+    powerUpButton.boundingBox = CGRectMake(240, 0, 240, 320);
     [powerUpButton setButtonName:@"powerUpButton"];
     [self addChild:powerUpButton z:11];
+    [powerUpButton release];
     //
 }
 - (void) dealloc {

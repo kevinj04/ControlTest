@@ -11,9 +11,10 @@
 #import "SetTargetLayer.h"
 #import "MovableObject.h"
 #import "PlayerObject.h"
-#import "ObstacleObject.h"
+#import "GrandObstacleObject.h"
 #import "SneakyButton.h"
-#import "DoubleTapButton.h"
+#import "CTDoubleTap.h"
+
 
 @interface TestScene : CCScene {
 
@@ -21,9 +22,10 @@
     PlayerObject *hero;
     CCLabelBMFont *speedLabel;
     NSArray *obstacles;
+    obstacleOrientation orientation; 
     
     SneakyButton *brake;
-    DoubleTapButton *powerUpButton;
+    CTDoubleTap *powerUpButton;
 }
 
 @property (nonatomic, retain) SetTargetLayer *targetLayer;
@@ -32,7 +34,8 @@
 @property (nonatomic, retain) NSArray *obstacles;
 
 @property (nonatomic, retain) SneakyButton *brake;
-@property (nonatomic, retain) DoubleTapButton *powerUpButton;
+@property (nonatomic, retain) CTDoubleTap *powerUpButton;
+@property obstacleOrientation orientation;
 
 - (id) init;
 + (id) scene;

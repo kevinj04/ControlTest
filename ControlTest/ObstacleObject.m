@@ -10,7 +10,7 @@
 
 @implementation ObstacleObject
 
-@synthesize xSpeed;
+@synthesize xSpeed, speedFactor;
 
 - (id) init{
     
@@ -37,6 +37,7 @@
                                     -100 + arc4random() % 420, 
                                     10 + arc4random() % 140, 
                                     10 +arc4random() % 90)];
+    speedFactor = 0.5 + 2.0 * CCRANDOM_0_1();
     xSpeed = 0.0;
     //NSLog(@"Obstacle Reset");
     
@@ -45,7 +46,7 @@
 
 - (void) update:(ccTime) dt{
     
-    model.origin.x -= xSpeed * dt * 4.0;
+    model.origin.x -= xSpeed * speedFactor * dt * 2.0;
     
     if(model.origin.x < -200.0)
         [self randomReset];

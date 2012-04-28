@@ -12,10 +12,12 @@
 @interface ObstacleObject : MovableObject {
     
     float xSpeed;
+    float speedFactor;
     
 }
 
 @property float xSpeed;
+@property float speedFactor;
 
 - (id) init;
 - (void) update:(ccTime) dt;

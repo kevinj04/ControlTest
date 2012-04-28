@@ -10,11 +10,16 @@
 
 @implementation MovableObject
 
-@synthesize model;
+@synthesize model, red, green, blue, alpha;
 
 - (id) init 
 {
     if( (self=[super init])) {
+        
+        red = 1.0;
+        green = 0.0;
+        blue = 1.0;
+        alpha = 1.0;
         
 		[self setupWithRect:CGRectMake(0, 0, 10, 10)];
     }
@@ -27,7 +32,10 @@
     // always call "super" init
 	// Apple recommends to re-assign "self" with the "super" return value
 	if( (self=[super init])) {
-        
+        red = 1.0;
+        green = 0.0;
+        blue = 1.0;
+        alpha = 1.0;
 		[self setupWithRect:rect];
     }
 	return self;
@@ -53,7 +61,7 @@
 
 - (void) draw
 {
-    glColor4f(1.0, 0.0, 1.0, 1.0);
+    glColor4f(red, green, blue, alpha);
     glLineWidth(2.0f);
     //top
     ccDrawLine(ccp(model.origin.x - model.size.width/2, model.origin.y + model.size.height/2), 

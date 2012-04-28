@@ -12,10 +12,18 @@
 @interface MovableObject : CCNode {
     
     CGRect model;
+    float red;
+    float green;
+    float blue;
+    float alpha;
     
 }
 
 @property CGRect model;
+@property float red;
+@property float green;
+@property float blue;
+@property float alpha;
 
 - (id) init;
 - (id) initWithRect:(CGRect) rect;

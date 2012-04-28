@@ -132,6 +132,8 @@
 		2082A9C51549CE980011BB68 /* debugFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C11549CE980011BB68 /* debugFont.fnt */; };
 		2082A9C61549CE980011BB68 /* debugFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C21549CE980011BB68 /* debugFont.png */; };
 		2082A9C91549D3020011BB68 /* ObstacleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2082A9C81549D3020011BB68 /* ObstacleObject.m */; };
+		20A1F704154B6A4F00B46E05 /* CTDoubleTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1F703154B6A4F00B46E05 /* CTDoubleTap.m */; };
+		20A1F70A154B6CA700B46E05 /* GrandObstacleObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A1F709154B6CA700B46E05 /* GrandObstacleObject.m */; };
 		20F969901549AA2A00B03C46 /* MovableObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 20F9698F1549AA2A00B03C46 /* MovableObject.m */; };
 /* End PBXBuildFile section */
 
@@ -409,6 +411,10 @@
 		2082A9C21549CE980011BB68 /* debugFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = debugFont.png; sourceTree = "<group>"; };
 		2082A9C71549D3020011BB68 /* ObstacleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObstacleObject.h; sourceTree = "<group>"; };
 		2082A9C81549D3020011BB68 /* ObstacleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObstacleObject.m; sourceTree = "<group>"; };
+		20A1F702154B6A4E00B46E05 /* CTDoubleTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTDoubleTap.h; sourceTree = "<group>"; };
+		20A1F703154B6A4F00B46E05 /* CTDoubleTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTDoubleTap.m; sourceTree = "<group>"; };
+		20A1F708154B6CA700B46E05 /* GrandObstacleObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GrandObstacleObject.h; path = ../GrandObstacleObject.h; sourceTree = "<group>"; };
+		20A1F709154B6CA700B46E05 /* GrandObstacleObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GrandObstacleObject.m; path = ../GrandObstacleObject.m; sourceTree = "<group>"; };
 		20F9698E1549AA2A00B03C46 /* MovableObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovableObject.h; sourceTree = "<group>"; };
 		20F9698F1549AA2A00B03C46 /* MovableObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovableObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -481,6 +487,10 @@
 				20F9698F1549AA2A00B03C46 /* MovableObject.m */,
 				2082A9C71549D3020011BB68 /* ObstacleObject.h */,
 				2082A9C81549D3020011BB68 /* ObstacleObject.m */,
+				20A1F708154B6CA700B46E05 /* GrandObstacleObject.h */,
+				20A1F709154B6CA700B46E05 /* GrandObstacleObject.m */,
+				20A1F702154B6A4E00B46E05 /* CTDoubleTap.h */,
+				20A1F703154B6A4F00B46E05 /* CTDoubleTap.m */,
 				2082A9B31549BD6A0011BB68 /* PlayerObject.h */,
 				2082A9B41549BD6A0011BB68 /* PlayerObject.m */,
 				0AC54E5715474C6000AD41D6 /* TestScene.h */,
@@ -1052,6 +1062,8 @@
 				20F969901549AA2A00B03C46 /* MovableObject.m in Sources */,
 				2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */,
 				2082A9C91549D3020011BB68 /* ObstacleObject.m in Sources */,
+				20A1F704154B6A4F00B46E05 /* CTDoubleTap.m in Sources */,
+				20A1F70A154B6CA700B46E05 /* GrandObstacleObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
