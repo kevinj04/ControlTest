@@ -106,14 +106,9 @@
         xSpeed = fmax(0.0, xSpeed - 1.0);
     }
     else{
-        xSpeed += (speedLimit - xSpeed)*(1.0/500.0) + (1/10.0);
-        if(juice > 0){
-            float jfx = 0.5;
-            xSpeed += jfx;
-            juice -= jfx;
-        }
+        xSpeed += ((speedLimit + fmax(0.0,juice)) - xSpeed)*(1.0/500.0) + (1/10.0);
+        juice += (0.0 - juice)/1000.0;
     }
-    
 }
 - (void) draw{
     

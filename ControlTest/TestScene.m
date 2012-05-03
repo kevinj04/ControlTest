@@ -138,7 +138,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     orientation = side;
     
     timeRemaining = 30.0;
-    distanceToCheckpoint = 1000.0;
+    distanceToCheckpoint = 5000.0;
     
     NSMutableArray *tmpObstacles = [[NSMutableArray alloc] init];
     for (int i = 0; i < NUM_OBSTACLES; i++) {
@@ -215,14 +215,17 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     
     if(distanceToCheckpoint <= 0){
         //checkpoint
-        timeRemaining += 10.0;
-        distanceToCheckpoint = floor(totalDistance)*1.2;
+        float rank = floorf(totalDistance / 1000.0); // rounded float based on distance 1
+        
+        
+        timeRemaining += 10.0 + powf(rank,0.5);
+        distanceToCheckpoint = timeRemaining * (200.0 + powf(rank,0.5)*30.0);
     }
     else if(timeRemaining <= 0.0){
         // lost!
         NSLog(@"Made it %.0f before time ran out",totalDistance);
         totalDistance = 0.0;
-        distanceToCheckpoint = 1000.0;
+        distanceToCheckpoint = 5000.0;
         timeRemaining = 30.0;
     }
     
@@ -275,7 +278,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     
      [checkpointLabel setString:[NSString stringWithFormat:@"To Checkpoint: %.0f", distanceToCheckpoint]];
     
-     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f", timeRemaining]];
+     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f - WarpX: %i", timeRemaining, 5-boostStreak]];
     
 }
 
