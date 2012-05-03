@@ -16,6 +16,7 @@
     float height;
     bool isBraking;
     float speedLimit;
+    float juice;
 }
 
 @property float xSpeed;
@@ -23,17 +24,19 @@
 @property float width;
 @property float height;
 @property bool isBraking;
+@property float juice;
 
 - (id) init;
 - (void) setup;
 - (void) update:(ccTime) dt;
 - (void) draw;
+- (void) warp;
 - (void) drag;
 - (void) dealloc;
 - (void) setX:(float) newX;
 - (void) setY:(float) newY;
 - (void) steerToPoint:(CGPoint) point;
-- (void) speedBoost;
+- (void) speedBoostOf:(float) boost;
 - (void) killBoost;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "TestScene.h"
-#define NUM_OBSTACLES 10
+#define NUM_OBSTACLES 20
 
 NSString *const nSetTarget = @"targetLayerUpdate";
 
@@ -46,7 +46,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 - (void) handleBrakeButtonDown:(NSNotification *) notification {
     NSLog(@"Brake Down");
     //[hero setIsBraking:YES];
-    [hero speedBoost];
+    //[hero speedBoost];
 }
 - (void) handleBrakeButtonUp:(NSNotification *) notification {
     //[hero setIsBraking:NO];
@@ -84,7 +84,8 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 @implementation TestScene
 
-@synthesize targetLayer, hero, speedLabel, obstacles, stars, brake, powerUpButton, orientation;
+@synthesize targetLayer, boostStreak, hero, speedLabel, distanceLabel, timeLabel, checkpointLabel, obstacles, stars, brake, powerUpButton, orientation, powerups;
+@synthesize timeRemaining, totalDistance, distanceToCheckpoint;
 
 - (id) init {
     
@@ -110,11 +111,34 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     [self addChild:hero z:1];
     
     speedLabel = [CCLabelBMFont labelWithString:@"a" fntFile:@"debugFont.fnt"];
-    [speedLabel setPosition:CGPointMake(100.0, 300.0)];
+    [speedLabel setPosition:CGPointMake(20.0, 300.0)];
     [speedLabel setString:@"Works"];
+    speedLabel.anchorPoint = ccp(0,0);
     [self addChild:speedLabel z:1];
     
+    distanceLabel = [CCLabelBMFont labelWithString:@"a" fntFile:@"debugFont.fnt"];
+    [distanceLabel setPosition:CGPointMake(150.0, 300.0)];
+    [distanceLabel setString:@"Works"];
+    distanceLabel.anchorPoint = ccp(0,0);
+    [self addChild:distanceLabel z:1];
+    
+    checkpointLabel = [CCLabelBMFont labelWithString:@"a" fntFile:@"debugFont.fnt"];
+    [checkpointLabel setPosition:CGPointMake(20.0, 280.0)];
+    [checkpointLabel setString:@"Works"];
+    checkpointLabel.anchorPoint = ccp(0,0);
+    [self addChild:checkpointLabel z:1];
+    
+    timeLabel = [CCLabelBMFont labelWithString:@"a" fntFile:@"debugFont.fnt"];
+    [timeLabel setPosition:CGPointMake(20.0, 260.0)];
+    [timeLabel setString:@"Works"];
+    timeLabel.anchorPoint = ccp(0,0);
+    [self addChild:timeLabel z:1];
+    
+    boostStreak = 0;
     orientation = side;
+    
+    timeRemaining = 30.0;
+    distanceToCheckpoint = 1000.0;
     
     NSMutableArray *tmpObstacles = [[NSMutableArray alloc] init];
     for (int i = 0; i < NUM_OBSTACLES; i++) {
@@ -124,6 +148,13 @@ NSString *const nSetTarget = @"targetLayerUpdate";
         [self addChild:anObstacle z:2];
     }
   
+    NSMutableArray *tmpPowerups = [[NSMutableArray alloc] init];
+    for (int i = 0; i < 1; i++) {
+        PowerUp *aPU = [[PowerUp alloc] init];
+        [tmpPowerups addObject:aPU];
+        [self addChild:aPU z:1];
+    }
+    
     NSMutableArray *tmpStars = [[NSMutableArray alloc] init];
     for (int i = 0; i < 50; i++) {
         LineObject *aStar = [[LineObject alloc] init];
@@ -136,7 +167,9 @@ NSString *const nSetTarget = @"targetLayerUpdate";
   
     stars = [[NSArray alloc] initWithArray:tmpStars];
     [tmpStars release];
-    
+  
+    powerups = [[NSArray alloc] initWithArray:tmpPowerups];
+    [tmpPowerups release];
     
     targetLayer = [SetTargetLayer layerWithRect:CGRectMake(240, 0, 240, 320)];
     [self addChild:targetLayer z:12];
@@ -162,6 +195,8 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     [hero release];
     [speedLabel release];
     [obstacles release];
+    [stars release];
+    [powerups release];
     
     [super dealloc];
 }
@@ -173,6 +208,23 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 
 - (void) update:(double) dt {
+    
+    timeRemaining -= dt;
+    totalDistance += [hero xSpeed]*dt;
+    distanceToCheckpoint -= [hero xSpeed]*dt;
+    
+    if(distanceToCheckpoint <= 0){
+        //checkpoint
+        timeRemaining += 10.0;
+        distanceToCheckpoint = floor(totalDistance)*1.2;
+    }
+    else if(timeRemaining <= 0.0){
+        // lost!
+        NSLog(@"Made it %.0f before time ran out",totalDistance);
+        totalDistance = 0.0;
+        distanceToCheckpoint = 1000.0;
+        timeRemaining = 30.0;
+    }
     
     
     for (LineObject *o in stars) {
@@ -186,6 +238,25 @@ NSString *const nSetTarget = @"targetLayerUpdate";
         
         if(CGRectIntersectsRect([o model],[hero model])){
             [hero drag];
+            boostStreak = 0;
+            //[o randomReset];
+        }
+        
+    }
+    
+    for (PowerUp *pu in powerups) {
+        [pu setSpeed:[hero xSpeed]];
+        [pu update:dt];
+        
+        if(CGRectIntersectsRect([pu model],[hero model])){
+            [pu randomReset];
+            boostStreak++;
+            if(boostStreak == 5){
+                [hero warp];
+                boostStreak = 0;
+            }
+            else
+                [hero speedBoostOf:100.0];
         }
         
     }
@@ -198,7 +269,13 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) draw {
 
-    [speedLabel setString:[NSString stringWithFormat:@"Speed %3.0f", [hero xSpeed]]];
+     [speedLabel setString:[NSString stringWithFormat:@"Speed: %3.0f", [hero xSpeed]]];
+    
+     [distanceLabel setString:[NSString stringWithFormat:@"Distance: %.0f", totalDistance]];
+    
+     [checkpointLabel setString:[NSString stringWithFormat:@"To Checkpoint: %.0f", distanceToCheckpoint]];
+    
+     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f", timeRemaining]];
     
 }
 

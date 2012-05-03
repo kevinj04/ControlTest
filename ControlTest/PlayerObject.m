@@ -13,7 +13,7 @@
 
 @implementation PlayerObject
 
-@synthesize xSpeed, width, height, isBraking, speedLimit;
+@synthesize xSpeed, width, height, isBraking, speedLimit, juice;
 
 - (id) init{
     
@@ -33,6 +33,7 @@
     width = 33;
     isBraking = NO;
     speedLimit = MAX_SPEED;
+    juice = 0;
     
 }
 
@@ -44,13 +45,19 @@
     model.origin.y = newY;
 }
 
-- (void) speedBoost
+- (void) warp
 {
     
     speedLimit = 5000.0;
     [self performSelector:@selector(killBoost) withObject:nil afterDelay:2.0];
     
 }
+
+- (void) speedBoostOf:(float) boost
+{
+    juice += boost;
+}
+
 
 - (void) killBoost
 {
@@ -61,9 +68,10 @@
 - (void) drag
 {
  
-    xSpeed *= 0.95;
+    xSpeed *= 0.99;
     
 }
+
 
 
 - (void) steerToPoint:(CGPoint) point{
@@ -90,15 +98,21 @@
 - (void) update:(ccTime) dt{
     
     [super update:dt];
-    model.size.width = fmin(100.0, width * (1.0 + xSpeed/100.0));
-    model.size.height = fmax(1.0, height / (1.0 + xSpeed/100.0));
+    model.size.width = fmin(100.0, width * (1.0 + xSpeed/200.0));
+    model.size.height = fmax(1.0, height / (1.0 + xSpeed/200.0));
     
     if(isBraking){
         xSpeed += (0.0 - xSpeed)*(1.0/500.0);
         xSpeed = fmax(0.0, xSpeed - 1.0);
     }
-    else
+    else{
         xSpeed += (speedLimit - xSpeed)*(1.0/500.0) + (1/10.0);
+        if(juice > 0){
+            float jfx = 0.5;
+            xSpeed += jfx;
+            juice -= jfx;
+        }
+    }
     
 }
 - (void) draw{

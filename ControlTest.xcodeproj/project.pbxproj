@@ -126,6 +126,7 @@
 		0AC54E3C1547485D00AD41D6 /* libUserInput.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AC54E35154747DA00AD41D6 /* libUserInput.a */; };
 		0AC54E56154748C300AD41D6 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 0AC54E55154748C300AD41D6 /* Config.xcconfig */; };
 		0AC54E5915474C6000AD41D6 /* TestScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 0AC54E5815474C6000AD41D6 /* TestScene.m */; };
+		2050DC871551AC6700FA45C0 /* PowerUp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2050DC861551AC6700FA45C0 /* PowerUp.m */; };
 		2082A9B51549BD6A0011BB68 /* PlayerObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2082A9B41549BD6A0011BB68 /* PlayerObject.m */; };
 		2082A9C31549CE980011BB68 /* debugFont-hd.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9BF1549CE980011BB68 /* debugFont-hd.fnt */; };
 		2082A9C41549CE980011BB68 /* debugFont-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = 2082A9C01549CE980011BB68 /* debugFont-hd.png */; };
@@ -404,6 +405,8 @@
 		0AC54E55154748C300AD41D6 /* Config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 		0AC54E5715474C6000AD41D6 /* TestScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestScene.h; sourceTree = "<group>"; };
 		0AC54E5815474C6000AD41D6 /* TestScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestScene.m; sourceTree = "<group>"; };
+		2050DC851551AC6700FA45C0 /* PowerUp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUp.h; sourceTree = "<group>"; };
+		2050DC861551AC6700FA45C0 /* PowerUp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUp.m; sourceTree = "<group>"; };
 		2082A9B31549BD6A0011BB68 /* PlayerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerObject.h; sourceTree = "<group>"; };
 		2082A9B41549BD6A0011BB68 /* PlayerObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerObject.m; sourceTree = "<group>"; };
 		2082A9BF1549CE980011BB68 /* debugFont-hd.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "debugFont-hd.fnt"; sourceTree = "<group>"; };
@@ -492,6 +495,8 @@
 				20A1F738154C256D00B46E05 /* LineObject.m */,
 				2082A9C71549D3020011BB68 /* ObstacleObject.h */,
 				2082A9C81549D3020011BB68 /* ObstacleObject.m */,
+				2050DC851551AC6700FA45C0 /* PowerUp.h */,
+				2050DC861551AC6700FA45C0 /* PowerUp.m */,
 				20A1F708154B6CA700B46E05 /* GrandObstacleObject.h */,
 				20A1F709154B6CA700B46E05 /* GrandObstacleObject.m */,
 				20A1F702154B6A4E00B46E05 /* CTDoubleTap.h */,
@@ -1070,6 +1075,7 @@
 				20A1F704154B6A4F00B46E05 /* CTDoubleTap.m in Sources */,
 				20A1F70A154B6CA700B46E05 /* GrandObstacleObject.m in Sources */,
 				20A1F739154C256E00B46E05 /* LineObject.m in Sources */,
+				2050DC871551AC6700FA45C0 /* PowerUp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

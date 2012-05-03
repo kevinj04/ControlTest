@@ -46,7 +46,7 @@
     CGRect newRect = CGRectMake(x, z, widthWarp, depthWarp);
     [self setupWithRect:newRect];
     red = 1.0;
-    green = 1.0;
+    green = 0.0;
     blue = 0.0;
     
 }
@@ -55,9 +55,9 @@
     //switch model    
     CGRect newRect = CGRectMake(x, y, widthWarp, heightWarp);
     [self setupWithRect:newRect];
-    red = 0.0;
-    green = 1.0;
-    blue = 1.0;
+     red = 1.0;
+    green = 0.0;
+    blue = 0.0;
 }
 
 - (void) randomReset {
@@ -66,13 +66,15 @@
     y = -100 + arc4random() % 420;
     z = -100 + arc4random() % 420;
     
-    height = 10 +arc4random() % 90;
-    width = 10 + arc4random() % 90;
-    depth = 10 +arc4random() % 90;
+    height = 10 + powf(CCRANDOM_0_1(),2) * 100;
+    width = 10 +  powf(CCRANDOM_0_1(),2) * 100;
+    depth = 10 +  powf(CCRANDOM_0_1(),2) * 100;    
+    
+    //[self setRotation: arc4random() % 360];
     
     //reset the position and size
   
-    speedFactor = 0.8 + 0.4 * CCRANDOM_0_1();
+    speedFactor = 0.5; //0.8 + 0.4 * CCRANDOM_0_1();
     xSpeed = 0.0;
     //NSLog(@"Obstacle Reset");
  
@@ -106,7 +108,7 @@
     
     x = [self model].origin.x;
     
-    warpFactor = 1.0 + xSpeed/200.0; 
+    warpFactor = 1.0 + xSpeed/400.0; 
     
     widthWarp = fmin(300.0, width * warpFactor);
     heightWarp = fmax(1.0, height / warpFactor);
@@ -136,6 +138,8 @@
             break;
     }
     
+    /*
+    
     glColor4f(r/4.0, g/4.0, b/4.0, 0.0);
     glLineWidth(2.0f);
     
@@ -163,6 +167,7 @@
         default:
             break;
     }
+     */
     
     [super draw];
 }
