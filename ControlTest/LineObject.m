@@ -42,10 +42,20 @@
 
 - (void) update:(ccTime) dt{
     
-    model.origin.x -= xSpeed * dt * paralaxFactor;
-    model.size.width = 1.0 + powf(xSpeed/500.0,6.0) * paralaxFactor;
     
-    if(model.origin.x < -10.0)
+    float safeDistanceFactor = 1.0 - fmin(1.0,fmax(0,model.origin.x)/480.0);
+    // the above number is 0 when an object just enters the screen, and 1 when it leaves
+    float speedFactor = powf(safeDistanceFactor, fmax(1.0,xSpeed/200.0)) * 0.9 + 0.1;
+    float slowSpeed = powf(xSpeed,0.5) * dt * 5.0 * paralaxFactor;
+    float fastSpeed = xSpeed * dt * 2.0 * paralaxFactor;
+    
+    model.origin.x -= slowSpeed + speedFactor * fastSpeed;
+/// 
+    
+    model.origin.x -= xSpeed * dt * paralaxFactor;
+    model.size.width = 1.0 + floorf((slowSpeed + speedFactor * fastSpeed)/dt/20.0);
+    
+    if(model.origin.x < -100.0)
         [self randomReset];
     
     //NSLog(@"Position: %f and Speed: %f",model.origin.x, xSpeed);

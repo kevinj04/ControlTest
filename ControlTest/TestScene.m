@@ -7,7 +7,7 @@
 //
 
 #import "TestScene.h"
-#define NUM_OBSTACLES 20
+#define NUM_OBSTACLES 25
 
 NSString *const nSetTarget = @"targetLayerUpdate";
 
@@ -138,7 +138,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     orientation = side;
     
     timeRemaining = 30.0;
-    distanceToCheckpoint = 5000.0;
+    distanceToCheckpoint = 3000.0;
     
     NSMutableArray *tmpObstacles = [[NSMutableArray alloc] init];
     for (int i = 0; i < NUM_OBSTACLES; i++) {
@@ -209,6 +209,10 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) update:(double) dt {
     
+    if(timeRemaining < 10.0 && distanceToCheckpoint < 1000.0){
+        dt = dt*(0.5 + 0.5 * timeRemaining/10.0);
+    }
+    
     timeRemaining -= dt;
     totalDistance += [hero xSpeed]*dt;
     distanceToCheckpoint -= [hero xSpeed]*dt;
@@ -216,16 +220,16 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     if(distanceToCheckpoint <= 0){
         //checkpoint
         float rank = floorf(totalDistance / 1000.0); // rounded float based on distance 1
-        
-        
-        timeRemaining += 10.0 + powf(rank,0.5);
-        distanceToCheckpoint = timeRemaining * (200.0 + powf(rank,0.5)*30.0);
+        float timeReward = 10.0 + powf(rank,0.5);
+        distanceToCheckpoint = timeReward * (200.0 + powf(rank,0.5)*50.0);
+        timeRemaining += timeReward;
+        NSLog(@"Required Avergage Speed: %3.1f",distanceToCheckpoint/timeReward);
     }
     else if(timeRemaining <= 0.0){
         // lost!
         NSLog(@"Made it %.0f before time ran out",totalDistance);
         totalDistance = 0.0;
-        distanceToCheckpoint = 5000.0;
+        distanceToCheckpoint = 3000.0;
         timeRemaining = 30.0;
     }
     
@@ -240,9 +244,12 @@ NSString *const nSetTarget = @"targetLayerUpdate";
         [o update:dt];
         
         if(CGRectIntersectsRect([o model],[hero model])){
-            [hero drag];
-            boostStreak = 0;
-            //[o randomReset];
+            if([o interactive]){
+                [hero drag];
+                [hero warpKill];
+                boostStreak = [hero warpStreak];
+                [o setInteractive:NO];
+            }
         }
         
     }
@@ -252,14 +259,12 @@ NSString *const nSetTarget = @"targetLayerUpdate";
         [pu update:dt];
         
         if(CGRectIntersectsRect([pu model],[hero model])){
-            [pu randomReset];
-            boostStreak++;
-            if(boostStreak == 5){
+            if([pu interactive]){
                 [hero warp];
-                boostStreak = 0;
+                [pu setInteractive:NO];
+                boostStreak = [hero warpStreak];
             }
-            else
-                [hero speedBoostOf:100.0];
+           
         }
         
     }
@@ -278,7 +283,7 @@ NSString *const nSetTarget = @"targetLayerUpdate";
     
      [checkpointLabel setString:[NSString stringWithFormat:@"To Checkpoint: %.0f", distanceToCheckpoint]];
     
-     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f - WarpX: %i", timeRemaining, 5-boostStreak]];
+     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f - WarpX: %i", timeRemaining, boostStreak]];
     
 }
 

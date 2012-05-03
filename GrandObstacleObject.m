@@ -62,13 +62,15 @@
 
 - (void) randomReset {
     
-    x = 580.0 + arc4random() % 2000;
-    y = -100 + arc4random() % 420;
-    z = -100 + arc4random() % 420;
+    interactive = YES;
     
-    height = 10 + powf(CCRANDOM_0_1(),2) * 100;
-    width = 10 +  powf(CCRANDOM_0_1(),2) * 100;
-    depth = 10 +  powf(CCRANDOM_0_1(),2) * 100;    
+    x = 580.0 + CCRANDOM_0_1() * (2000 + xSpeed * 5.0);
+    y = -100 + CCRANDOM_0_1() * 420;
+    z = -100 + CCRANDOM_0_1() * 420;
+    
+    height = 10 + CCRANDOM_0_1() * 50;
+    width = 10 + CCRANDOM_0_1() * 50;
+    depth = 10 + CCRANDOM_0_1() * 50;  
     
     //[self setRotation: arc4random() % 360];
     
@@ -108,7 +110,7 @@
     
     x = [self model].origin.x;
     
-    warpFactor = 1.0 + xSpeed/400.0; 
+    warpFactor = fmin(1.0 + xSpeed/400.0,3.0);
     
     widthWarp = fmin(300.0, width * warpFactor);
     heightWarp = fmax(1.0, height / warpFactor);

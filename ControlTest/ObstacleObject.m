@@ -7,11 +7,11 @@
 //
 
 #import "ObstacleObject.h"
-#define PROXIMITY_ALERT 480.0
+#define PROXIMITY_ALERT 1000.0
 
 @implementation ObstacleObject
 
-@synthesize xSpeed, speedFactor;
+@synthesize xSpeed, speedFactor, interactive;
 
 - (id) init{
     
@@ -38,7 +38,6 @@
                                     -100 + arc4random() % 420, 
                                     10 + arc4random() % 140, 
                                     10 +arc4random() % 90)];
-    speedFactor = 0.5 + 2.0 * CCRANDOM_0_1();
     xSpeed = 0.0;
     //NSLog(@"Obstacle Reset");
     
@@ -47,7 +46,16 @@
 
 - (void) update:(ccTime) dt{
     
-    model.origin.x -= xSpeed * speedFactor * dt * 2.0;
+    float safeDistanceFactor = 1.0 - fmin(1.0,fmax(0,model.origin.x)/480.0);
+    // the above number is 0 when an object just enters the screen, and 1 when it leaves
+    speedFactor = powf(safeDistanceFactor, fmax(1.0,xSpeed/200.0)) * 0.9 + 0.1;
+    
+    float slowSpeed = powf(xSpeed,0.5) * dt * 10.0;
+    float fastSpeed = xSpeed * dt * 2.0;
+    
+    model.origin.x -= slowSpeed + speedFactor * fastSpeed;
+   
+    
     
     if(model.origin.x < -500.0)
         [self randomReset];

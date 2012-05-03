@@ -16,11 +16,12 @@
 
 - (void) randomReset {
     
+    interactive = YES;
     //reset the position and size
-    [super setupWithRect:CGRectMake(580.0 + arc4random() % 1000, 
-                                    10 + arc4random() % 300, 
-                                    15, 
-                                    15) 
+    [super setupWithRect:CGRectMake(580.0, 
+                                    10 + CCRANDOM_0_1() * 300, 
+                                    5, 
+                                    100) 
     ];
     speedFactor = 0.5;
     xSpeed = 0.0;
@@ -54,6 +55,7 @@
     }
     
 }
+
 
 - (void) dealloc{
     

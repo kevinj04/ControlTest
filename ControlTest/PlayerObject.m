@@ -13,7 +13,7 @@
 
 @implementation PlayerObject
 
-@synthesize xSpeed, width, height, isBraking, speedLimit, juice;
+@synthesize xSpeed, width, height, isBraking, speedLimit, juice, warpStreak;
 
 - (id) init{
     
@@ -34,6 +34,7 @@
     isBraking = NO;
     speedLimit = MAX_SPEED;
     juice = 0;
+    warpStreak = 0;
     
 }
 
@@ -47,10 +48,17 @@
 
 - (void) warp
 {
-    
-    speedLimit = 5000.0;
-    [self performSelector:@selector(killBoost) withObject:nil afterDelay:2.0];
-    
+    warpStreak++;
+    juice += warpStreak * 25.0;
+    if(warpStreak % 5 == 0){
+        speedLimit = warpStreak * 200.0;
+        juice += warpStreak * 75.0;
+        [self performSelector:@selector(killSuperWarp) withObject:nil afterDelay:2.0];
+    }
+}
+
+-(void) killSuperWarp{
+    speedLimit = MAX_SPEED;
 }
 
 - (void) speedBoostOf:(float) boost
@@ -59,16 +67,17 @@
 }
 
 
-- (void) killBoost
+- (void) warpKill
 {
-    speedLimit = MAX_SPEED;
+    warpStreak = 0;
+    juice = 0;
 }
 
 
 - (void) drag
 {
  
-    xSpeed *= 0.99;
+    xSpeed *= 0.666;
     
 }
 
@@ -87,7 +96,7 @@
         dy = fmax(dy, MAX_TURN_SPEED * -1.0);
     
     if(xSpeed > 1.0)
-        model.origin.y += dy * (0.10 + xSpeed/100.0*0.9);
+        model.origin.y += dy * fmin(2.0,(0.10 + xSpeed/200.0*0.9));
     
     // decrement speed
     if(xSpeed>0)
@@ -106,8 +115,13 @@
         xSpeed = fmax(0.0, xSpeed - 1.0);
     }
     else{
-        xSpeed += ((speedLimit + fmax(0.0,juice)) - xSpeed)*(1.0/500.0) + (1/10.0);
-        juice += (0.0 - juice)/1000.0;
+        xSpeed += fmax(0.0,((speedLimit + 100 * warpStreak) - xSpeed)*(1.0/500.0));
+        if(juice>0){
+            float dj = (0.0-juice)/500.0;
+            xSpeed += fabsf(dj);
+            juice += dj;
+        }
+         
     }
 }
 - (void) draw{

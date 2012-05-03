@@ -13,11 +13,13 @@
     
     float xSpeed;
     float speedFactor;
+    bool interactive;
     
 }
 
 @property float xSpeed;
 @property float speedFactor;
+@property bool interactive;
 
 - (id) init;
 - (void) update:(ccTime) dt;

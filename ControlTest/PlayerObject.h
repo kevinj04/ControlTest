@@ -17,6 +17,7 @@
     bool isBraking;
     float speedLimit;
     float juice;
+    int warpStreak;
 }
 
 @property float xSpeed;
@@ -24,6 +25,7 @@
 @property float width;
 @property float height;
 @property bool isBraking;
+@property int warpStreak;
 @property float juice;
 
 - (id) init;
@@ -37,6 +39,7 @@
 - (void) setY:(float) newY;
 - (void) steerToPoint:(CGPoint) point;
 - (void) speedBoostOf:(float) boost;
-- (void) killBoost;
+- (void) warpKill;
+- (void) killSuperWarp;
 
 @end
