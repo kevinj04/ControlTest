@@ -277,13 +277,16 @@ NSString *const nSetTarget = @"targetLayerUpdate";
 
 - (void) draw {
 
-     [speedLabel setString:[NSString stringWithFormat:@"Speed: %3.0f", [hero xSpeed]]];
-    
-     [distanceLabel setString:[NSString stringWithFormat:@"Distance: %.0f", totalDistance]];
-    
-     [checkpointLabel setString:[NSString stringWithFormat:@"To Checkpoint: %.0f", distanceToCheckpoint]];
-    
-     [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f - WarpX: %i", timeRemaining, boostStreak]];
+   
+    [speedLabel setString:[NSString stringWithFormat:@"Speed: %3.0f", [hero xSpeed]]];
+
+    [distanceLabel setString:[NSString stringWithFormat:@"Distance: %.0f", totalDistance]];
+     
+    if([hero xSpeed]>(distanceToCheckpoint/timeRemaining))
+        [checkpointLabel setString:[NSString stringWithFormat:@"To CP: %.0f", distanceToCheckpoint]];
+    else
+        [checkpointLabel setString:[NSString stringWithFormat:@"To CP: %.0f HURRY UP!", distanceToCheckpoint]];
+    [timeLabel setString:[NSString stringWithFormat:@"Time: %2.1f - WarpX: %i", timeRemaining, boostStreak]];
     
 }
 
